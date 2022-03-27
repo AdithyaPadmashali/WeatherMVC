@@ -16,7 +16,7 @@ public class WeatherModel {
         this.temp = 0.0f;
         this.minTemp = 0.0f;
         this.maxTemp = 0.0f;
-        this.description = "Enter the city name";
+        this.description = "Enter valid city name";
         // this.APIKEY = "d562ffb6eeba9537b10813b30795b078";
         this.city = "London";
         File apiFile = new File("./APIKEY.txt");
@@ -43,6 +43,7 @@ public class WeatherModel {
             in.close();
         } catch (IOException e) {
             System.out.println(e);
+            return;
         }
         if (this.response != null) {
             this.setTemp();
@@ -59,12 +60,12 @@ public class WeatherModel {
 
     private void setMinTemp() {
         int index = this.response.indexOf("temp_min") + 6 + 4;
-        this.minTemp = Float.parseFloat(response.substring(index, index + 6));
+        this.minTemp = Float.parseFloat(response.substring(index, index + 5));
     }
 
     private void setMaxTemp() {
         int index = this.response.indexOf("temp") + 6;
-        this.maxTemp = Float.parseFloat(response.substring(index, index + 6));
+        this.maxTemp = Float.parseFloat(response.substring(index, index + 5));
     }
 
     private void setDescription() {
